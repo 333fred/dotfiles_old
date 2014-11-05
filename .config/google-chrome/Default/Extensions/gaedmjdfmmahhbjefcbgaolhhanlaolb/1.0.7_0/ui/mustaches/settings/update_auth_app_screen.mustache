@@ -1,0 +1,45 @@
+<div class="selectLogoScreen">
+
+    {{^newAccount}}
+    <div class="logoTitle">
+        <img class="small" src="{{currentLogo}}">
+        <div>
+            {{currentLogoName}}
+        </div>
+    </div>
+    {{/newAccount}}
+    {{#newAccount}}
+    <div class="title">
+        {{title}}
+    </div>
+    {{/newAccount}}
+    <div class="subtitle">
+        {{subtitle}}
+    </div>
+    <div class="accountList">
+        {{#accounts}}
+            <div class="row account" data-account-type="{{type}}">
+                <div class="small-2 columns">
+                    <img src="{{menuItemUrl}}" alt="">
+                </div>
+                <div class="small-10 columns">
+                    <div class="accountName" >{{#titleize}}{{name}}{{/titleize}}</div>
+                </div>
+            </div>
+        {{/accounts}}
+        {{^accounts}}
+            <div class="noAccounts">
+                Accounts have not loaded yet
+            </div>
+        {{/accounts}}
+    </div>
+    <div class="accountInput row">
+        <div class="small-9 columns nameInput">
+            <input id="txtAppName" class="white" type="text" value="{{currentName}}" placeholder="Enter a name for this account" />
+        </div>
+        <div class="small-3 columns">
+            <button id="btnDone" class="small button-blue"> Done </button>
+        </div>
+    </div>
+
+</div>

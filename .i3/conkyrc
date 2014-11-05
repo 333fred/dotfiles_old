@@ -1,0 +1,11 @@
+###    lovelybacon.deviantart.com   ####
+
+background no
+out_to_x no
+out_to_console yes
+update_interval 1
+total_run_times 0
+use_spacer none
+
+TEXT
+${if_running spotify}${exec ~/.i3/spotify_info_title} : ${exec ~/.i3/spotify_info_artist} | ${endif}CPU: ${freq_g 0}GHz ${cpu cpu0}% | Mem: ${memperc}% | ${if_up eth0}WdS:  ${downspeedf eth0} - ${upspeedf eth0} | ${endif}${if_up wlan0}WlS:  ${downspeedf wlan0} - ${upspeedf wlan0} | ${endif}${if_up wlan0}SQ:  ${wireless_link_qual_perc wlan0}%  | Vol: ${exec amixer get Master -M | grep -oE "[[:digit:]]*%"} | Bat: ${battery_percent BAT0}% | ${time %a %b %d %H:%M}
