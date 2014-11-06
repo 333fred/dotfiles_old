@@ -1,10 +1,13 @@
 # Various Dotfiles
+This is a set of various configuration changes that I've made to my system which encompasses my dotfiles, in addition to a few system settings such as touchpad configs and thinkpad-specific modifications.
+
 ## Programs:
 * [Emacs](#emacs)
 * [i3](#i3)
   * [DMenu](#dmenu)
   * [Conky](#conky)
 * [Synaptics Configs](#synaptics-configs)
+* [Thinkpad Modifications](#thinkpad-modifications)
 
 ## Emacs
 Emacs config list located in .emacs and .emacs.d/. Additional files that should be created or linked are .ido.last and .smex-items. There a quite a few plugins enabled, but the highlights are:
@@ -48,4 +51,10 @@ These go in an inputclass section for the touchpad:
 	Option "HorizEdgeScroll" "off"
 	Option "VertScrollDelta" "-111"
 	Option "HorizScrollDelta" "-111"
+```
+
+## Thinkpad Modifications
+On my T520, there are issues with iwlwifi and the 5GHz band. Disable the 5GHz band with a file located in /etc/modprode.d/iwlwifi-disable11n.conf:
+```bash
+	options iwlwifi 11n_disable=1
 ```
