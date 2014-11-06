@@ -200,4 +200,4 @@ bindsym XF86AudioMute exec amixer -D pulse set Master toggle
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-bindsym $MOD+SHIFT+x exec i3lock -c 000000
+bindsym $MOD+SHIFT+x exec cinnamon-screensaver-command --lock 
