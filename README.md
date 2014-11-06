@@ -21,7 +21,7 @@ Emacs config list located in .emacs and .emacs.d/. Additional files that should 
 * org-mode
 
 ## i3 
-i3 config is located .i3/config. My i3 is themed to go with the Numix Theme, found here: https://numixproject.org/ 
+i3 config is located .i3/config. My i3 is themed to go with the Numix Theme, found here: https://numixproject.org/. I'm enabling the cinnamon-settings-daemon on startup to ensure my gtk theme settings are appropriately applied across all applications.
 
 ## DMenu
 Using dmenu-recent-aliases from: https://github.com/orschiro/dmenu-scripts-collection
