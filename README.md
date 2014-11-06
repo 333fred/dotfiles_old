@@ -6,6 +6,7 @@ This is a set of various configuration changes that I've made to my system which
 * [i3](#i3)
   * [DMenu](#dmenu)
   * [i3status](#i3status)
+* [Redshift](#redshift)
 * [Synaptics Configs](#synaptics-configs)
 * [Thinkpad Modifications](#thinkpad-modifications)
 
@@ -40,6 +41,9 @@ The other information on the bar is:
 * Date/Time (year, month, day, hour, minute, sec (updates every 5 seconds)), military time
 
 The .i3config file should go in ~/, and will be autodetected by i3status if there.
+
+## Redshift
+I'm using redshift gtk in the manual location mode. Geoclue doesn't seem to work all the time, it has trouble finding my location. Redshift-gtk is exec'd by i3 on login.
 
 ## Synaptics Configs
 This goes in the 50-synaptics.conf file.
