@@ -1,8 +1,0 @@
-audio.sync_bitrate=320000
-audio.play_bitrate=320000
-core.flash_version=11
-autologin.blob="T8rURmNQjhxIHywZVa5B7gIm3W+4k3gO8LlnXpmKmx8p/nImVJnRKtzco8H0GEUa"
-autologin.canonical_username="333fred"
-autologin.username="333fred"
-core.clock_delta=0
-language="en"
