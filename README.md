@@ -1,9 +1,9 @@
-# Varios Dotfiles
+# Various Dotfiles
 ## Programs:
 * [Emacs](#emacs)
 * [i3](#i3)
   * [DMenu](#dmenu)
-  * [Conky is Available](#conky)
+  * [Conky](#conky)
 * [Synaptics Configs](#synaptics-configs)
 
 ## Emacs
@@ -26,9 +26,14 @@ This is in .i3/dmenu_recent_alias
 
 ## Conky
 A conky i3bar configuration is available in .i3/conkyrc. It uses dbus to communicate with a running instance of spotify and display information in the status bar. To use the conky version, replace the:
+```bash
 	status_command i3status
+```
 line with:
+```bash
 	status_command conky -c ~/.i3/conkyrc
+```
+The spotify dbus scripts were taken from here: https://gist.github.com/red-noise/9789642
 
 ## Synaptics Configs
 This goes in the 50-synaptics.conf file.
@@ -36,9 +41,11 @@ Locations:
 * Linux Mint 17/Ubuntu: /usr/share/X11/xorg.conf.d/
 * Arch Linux: /etc/X11/xorg.conf.d/
 These go in an inputclass section for the touchpad:
+```bash
 	Option "VertTwoFingerScroll" "on"
 	Option "HorizTwoFingerScroll" "on"
 	Option "VertEdgeScroll" "off"
 	Option "HorizEdgeScroll" "off"
 	Option "VertScrollDelta" "-111"
 	Option "HorizScrollDelta" "-111"
+```
