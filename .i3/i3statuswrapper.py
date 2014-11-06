@@ -31,7 +31,10 @@ import os
 def get_spotify_info():
     artistStream = os.popen("~/.i3/spotify_info_artist").read()
     titleStream = os.popen("~/.i3/spotify_info_title").read()
-    return str(titleStream).rstrip() + " : " + str(artistStream).rstrip()
+    barString = str(titleStream).rstrip() + " : " + str(artistStream).rstrip()
+    if len(barString) > 43:
+        barString = barString[:40] + "..."
+    return barString
 
 def print_line(message):
     """ Non-buffered printing to stdout. """
