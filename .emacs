@@ -9,7 +9,7 @@
       ido-everywhere t)
 (ido-mode)
 
-(set-frame-font "Consolas 11")
+(set-frame-font "Source Code Pro 10")
 
 ;; Initialize the packages repos
 (require 'package)

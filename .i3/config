@@ -24,7 +24,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
- font pango:Source Code Pro Medium 11
+font pango:Source Code Pro Medium 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -174,16 +174,16 @@ bar {
 	position top
 	font pango:Source Code Pro 10
 	
-colors {
-        background #2d2d2d
-        statusline #dedede
-        separator #2d2d2d
+	colors {
+               background #2d2d2d
+               statusline #dedede
+               separator #2d2d2d
 
-        focused_workspace  #d64937 #d64937 #dedede
-        active_workspace   #2d2d2d #5f676a #dedede
-        inactive_workspace #2d2d2d #2d2d2d #888888
-        urgent_workspace   #333333 #900000 #ffffff
-    }
+	       focused_workspace  #d64937 #d64937 #dedede
+               active_workspace   #2d2d2d #5f676a #dedede
+               inactive_workspace #2d2d2d #2d2d2d #888888
+               urgent_workspace   #333333 #900000 #ffffff
+  	}
 }
 
 
