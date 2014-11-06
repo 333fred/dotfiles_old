@@ -38,6 +38,7 @@ The other information on the bar is:
 * Battery/Charge, charge percent, time remaining (charge or decharge)
 * CPU Usage (avg over all cores)
 * Date/Time (year, month, day, hour, minute, sec (updates every 5 seconds)), military time
+
 The .i3config file should go in ~/, and will be autodetected by i3status if there.
 
 ## Synaptics Configs
