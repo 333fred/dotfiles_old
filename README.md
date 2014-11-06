@@ -61,3 +61,6 @@ On my T520, there are issues with iwlwifi and the 5GHz band. Disable the 5GHz ba
 ```bash
 	options iwlwifi 11n_disable=1
 ```
+
+## Other Programs
+I'm using tlp to manage laptop power, with all of the thinkpad extenstions installed. tlp can be found here: http://linrunner.de/en/tlp/tlp.html. My tlp config can be found below. It's mostly the standard config, but wifi is disabled on ethernet connect and reenabled on disconnect
