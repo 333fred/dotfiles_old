@@ -3,6 +3,8 @@ This is a set of various configuration changes that I've made to my system which
 
 ## Programs:
 * [Emacs](#emacs)
+  * [OmniSharp](#omnisharp)
+  * [gocode](#gocode)
 * [i3](#i3)
   * [DMenu](#dmenu)
   * [i3status](#i3status)
@@ -21,6 +23,13 @@ Emacs config list located in .emacs and .emacs.d/. Additional files that should 
 * ido-mode
 * smex-mode
 * org-mode
+* omnisharp
+
+## Omnisharp
+company-mode and flycheck use omnisharp to do C# completion, checking, and basically all other IDE features. Omnisharp server can be found here: https://github.com/OmniSharp/. On Ubuntu, Omnisharp needs the PPA specified in the omnisharp-server project, and the packages: monodevelop-current, mono-xbuild, and mono-devel.
+
+## gocode
+For go autocompletion, gocode needs to be installed. It can be found here: https://github.com/nsf/gocode
 
 ## i3 
 i3 config is located .i3/config. My i3 is themed to go with the Numix Theme, found here: https://numixproject.org/. I'm enabling the cinnamon-settings-daemon on startup to ensure my gtk theme settings are appropriately applied across all applications.
