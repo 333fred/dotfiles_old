@@ -13,7 +13,7 @@
 
 # On Mint, this ensures that my GTK settings are properly applied
 exec /usr/bin/cinnamon-settings-daemon
-exec --no-startup-id nm-applet
+exec --no-startup-id "nm-applet GTK_THEME=mint-x"
 exec --no-startup-id ~/.wallpaper.sh
 exec redshift-gtk
 

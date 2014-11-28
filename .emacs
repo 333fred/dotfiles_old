@@ -30,16 +30,35 @@
 
 ;; CSharp Mode
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
 
 ;; Auto-complete-mode
-(require 'auto-complete-config)
-(require 'auto-complete-c-headers)
-(add-to-list 'ac-sources 'ac-source-c-headers)
-(require 'go-autocomplete)
-(define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'racket-mode))
-(ac-config-default)
+;; (require 'auto-complete-config)
+;; (require 'auto-complete-c-headers)
+;; (add-to-list 'ac-sources 'ac-source-c-headers)
+;; (require 'go-autocomplete)
+;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+;; (eval-after-load "auto-complete"
+;;   '(add-to-list 'ac-modes 'racket-mode))
+;; (eval-after-load "auto-complete"
+;;   '(add-to-list 'ac-modes 'nusmv-mode))
+;; (ac-config-default)
+;; cpputils-cmake
+
+;; Company Mode
+(require 'company)                                   ; load company mode
+(require 'company-go)                                ; load company mode go backend
+(add-to-list 'company-backends 'company-c-headers)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (if (derived-mode-p 'c-mode 'c++-mode)
+                (cppcm-reload-all)
+              )))
+;; OPTIONAL, somebody reported that they can use this package with Fortran
+(add-hook 'c90-mode-hook (lambda () (cppcm-reload-all)))
+;; OPTIONAL, avoid typing full path when starting gdb
+(global-set-key (kbd "C-c C-g")
+ '(lambda ()(interactive) (gud-gdb (concat "gdb --fullname " (cppcm-get-exe-path-current-buffer)))))
 
 ;; Load the naquadah theme
 (require 'naquadah-theme)
@@ -60,6 +79,12 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+;; NuSMV
+(load-file "~/NuSMV/share/nusmv/contrib/nusmv-mode.el")
+(autoload 'nusmv-mode "nusmv-mode" "Major mode for NuSMV specification files." t)
+(setq auto-mode-alist
+      (append  (list '("\\.smv$" . nusmv-mode))
+	       auto-mode-alist))
 (icy-mode 1)
 
 ;; Emacs default settings
@@ -123,3 +148,51 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+;; Omnisharp keybindings
+(evil-define-key 'insert omnisharp-mode-map (kbd "M-.") 'omnisharp-auto-complete)
+(evil-define-key 'normal omnisharp-mode-map (kbd "<f12>") 'omnisharp-go-to-definition)
+(evil-define-key 'normal omnisharp-mode-map (kbd "K u") 'omnisharp-find-usages)
+(evil-define-key 'normal omnisharp-mode-map (kbd "K I") 'omnisharp-find-implementations) ; g i is taken
+(evil-define-key 'normal omnisharp-mode-map (kbd "K o") 'omnisharp-go-to-definition)
+(evil-define-key 'normal omnisharp-mode-map (kbd "K r") 'omnisharp-run-code-action-refactoring)
+(evil-define-key 'normal omnisharp-mode-map (kbd "K f") 'omnisharp-fix-code-issue-at-point)
+(evil-define-key 'normal omnisharp-mode-map (kbd "K F") 'omnisharp-fix-usings)
+(evil-define-key 'normal omnisharp-mode-map (kbd "K R") 'omnisharp-rename)
+(evil-define-key 'normal omnisharp-mode-map (kbd ", i") 'omnisharp-current-type-information)
+(evil-define-key 'normal omnisharp-mode-map (kbd ", I") 'omnisharp-current-type-documentation)
+(evil-define-key 'insert omnisharp-mode-map (kbd ".") 'omnisharp-add-dot-and-auto-complete)
+(evil-define-key 'normal omnisharp-mode-map (kbd ", n t") 'omnisharp-navigate-to-current-file-member)
+(evil-define-key 'normal omnisharp-mode-map (kbd ", n s") 'omnisharp-navigate-to-solution-member)
+(evil-define-key 'normal omnisharp-mode-map (kbd ", n f") 'omnisharp-navigate-to-solution-file-then-file-member)
+(evil-define-key 'normal omnisharp-mode-map (kbd ", n F") 'omnisharp-navigate-to-solution-file)
+(evil-define-key 'normal omnisharp-mode-map (kbd ", n r") 'omnisharp-navigate-to-region)
+(evil-define-key 'normal omnisharp-mode-map (kbd "<f12>") 'omnisharp-show-last-auto-complete-result)
+(evil-define-key 'insert omnisharp-mode-map (kbd "<f12>") 'omnisharp-show-last-auto-complete-result)
+(evil-define-key 'normal omnisharp-mode-map (kbd ",.") 'omnisharp-show-overloads-at-point)
+(evil-define-key 'normal omnisharp-mode-map (kbd ",rl") 'recompile)
+
+(evil-define-key 'normal omnisharp-mode-map (kbd ",rt")
+  (lambda() (interactive) (omnisharp-unit-test "single")))
+
+(evil-define-key 'normal omnisharp-mode-map
+  (kbd ",rf")
+  (lambda() (interactive) (omnisharp-unit-test "fixture")))
+
+(evil-define-key 'normal omnisharp-mode-map
+  (kbd ",ra")
+  (lambda() (interactive) (omnisharp-unit-test "all")))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
