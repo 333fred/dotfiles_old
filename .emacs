@@ -59,6 +59,12 @@
 ;; OPTIONAL, avoid typing full path when starting gdb
 (global-set-key (kbd "C-c C-g")
  '(lambda ()(interactive) (gud-gdb (concat "gdb --fullname " (cppcm-get-exe-path-current-buffer)))))
+(defun indent-or-complete ()
+  (interactive)
+  (if (looking-at "\\_>")
+      (company-complete-common)
+    (indent-according-to-mode)))
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; Load the naquadah theme
 (require 'naquadah-theme)
@@ -93,11 +99,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(inhibit-startup-screen t)
- '(initial-scratch-message nil)
- '(x-select-enable-clipboard t)
  '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(visible-bell t))
+ '(initial-scratch-message nil)
+ '(visible-bell t)
+ '(x-select-enable-clipboard t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

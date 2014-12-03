@@ -6,7 +6,8 @@ This is a set of various configuration changes that I've made to my system which
   * [OmniSharp](#omnisharp)
   * [gocode](#gocode)
 * [i3](#i3)
-  * [DMenu](#dmenu)
+  * [Mutate](#mutate)
+  * ~~[DMenu](#dmenu)~~
   * [i3status](#i3status)
   * [Wallpapers](#wallpaper)
 * [Redshift](#redshift)
@@ -34,7 +35,11 @@ For go autocompletion, gocode needs to be installed. It can be found here: https
 ## i3 
 i3 config is located .i3/config. My i3 is themed to go with the Numix Theme, found here: https://numixproject.org/. I'm enabling the cinnamon-settings-daemon on startup to ensure my gtk theme settings are appropriately applied across all applications.
 
-## DMenu
+## Mutate
+Mutate is a Spotlight-like launcher for Linux. I like it for being much more feature filled than DMenu. It has its own github, which can be found here: https://github.com/qdore/Mutate. This is easily installed in Ubuntu via the ppa, but it will compile the source to install it, which has dependencies on qt. If dmenu is preferred, you can comment out the exec of mutate and uncomment the dmenu binding. Mutate has been bound to win+d, just like dmenu was.
+
+## ~~DMenu~~
+**DMenu has been deprecated in favor of Mutate, which is much more feature filled and useful**
 Using dmenu-recent-aliases from: https://github.com/orschiro/dmenu-scripts-collection
 This is in .i3/dmenu_recent_alias
 
