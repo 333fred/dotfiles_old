@@ -1,0 +1,8 @@
+<div class="navbar">
+    {{^notDisplaySettings}}
+    <img id="btnSettings" src="img/tokens-screen/settings_icon.png" alt="">
+    <img id="notifIcon" src="img/notification.png" alt="" {{^shouldDisplayNotifIcon}}class="hide"{{/shouldDisplayNotifIcon}}>
+    {{/notDisplaySettings}}
+    <button id="btnQuit" class="btn-navbar"></button>
+    <button id="btnMinimize" class="btn-navbar"></button>
+</div>

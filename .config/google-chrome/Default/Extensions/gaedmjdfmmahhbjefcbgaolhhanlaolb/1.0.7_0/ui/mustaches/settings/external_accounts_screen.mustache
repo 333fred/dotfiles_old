@@ -1,0 +1,37 @@
+<div class="externalAccountsTab">
+
+    <div class="externalAccounts">
+        {{#apps}}
+            <div class="row externalAccount">
+                <div class="small-2 columns">
+                    <img class="accountLogo" src="{{getMenuImage}}" alt="">
+                </div>
+                <div class="small-7 columns">
+                    <div data-app-id="{{getId}}" class="accountName">{{getName}}{{^isMarkedForDeletion}}<img class="deleteButton" src="img/settings-screen/trash_icon.png">{{/isMarkedForDeletion}}{{#isMarkedForDeletion}}<span class="undeleteButton">Undelete</span>{{/isMarkedForDeletion}}</div>
+                </div>
+                <div class="small-2 columns">
+                    <img class="backupState" src="{{getBackingUpImage}}" data-backup-image-id="{{getId}}" alt="">
+                </div>
+            </div>
+        {{/apps}}
+        {{^apps}}
+            <div class="noApps">No Apps to display</div>
+        {{/apps}}
+    </div>
+    {{#backupsPassword}}
+    <div class="settings">
+        <div class="row">
+            <div class="small-5 columns settings-label">
+                Backups Password
+            </div>
+            <div class="small-6 columns">
+                <div class="settings-input">
+                    <input id="txtBackupsPassword" type="password" class="white" placeholder="No Password" value="**********" readonly/>
+                    <a id="btnChangeBackupsPassword" class="btnInputChange">Change</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/backupsPassword}}
+
+</div>

@@ -1,0 +1,29 @@
+{
+   "api_console_project_id": "7081045131",
+   "app": {
+      "launch": {
+         "web_url": "https://www.lucidchart.com/documents/eduApp"
+      },
+      "urls": [ "*://www.lucidchart.com/" ]
+   },
+   "container": [ "DOMAIN_INSTALLABLE", "GOOGLE_DRIVE" ],
+   "default_locale": "en",
+   "description": "__MSG_appDesc__",
+   "icons": {
+      "128": "chrome_edu.png"
+   },
+   "intents": {
+      "http://drive.google.com/intents/opendrivedoc": [ {
+         "disposition": "window",
+         "href": "https://www.lucidchart.com/documents/eduApp",
+         "title": "Open",
+         "type": [ "application/vnd.google.drive.ext-type.vsd", "application/vnd.google.drive.ext-type.vdx", "application/vnd.google.drive.ext-type.vsdx" ]
+      } ]
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCy4cbtEJj00O6yQL3+8ZnjMyIJnjdBkAqzhK8hCUpg+myRQI360KO+8i8cmpUCwmvEp3asf+PUSolizjgqUqPD8Hx5poUZr8H7gkChSSVbgBo2AZcJ52KBZoGxpTW6vEeevr9HB9fgYWTw5Ys4RxR+nSzXerPKWi+qKwa3JRjhoQIDAQAB",
+   "manifest_version": 2,
+   "name": "__MSG_appName__",
+   "permissions": [ "unlimitedStorage", "notifications", "clipboardRead", "clipboardWrite" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "15.1.1"
+}

@@ -1,0 +1,80 @@
+<div class="tokens-screen">
+
+    {{> navbar}}
+
+    <div class="container">
+        {{#apps}}
+            {{! This will be rendered if the app is decrypted}}
+            {{#isDecrypted}}
+                <div class="row token" data-token-id={{getId}} id="token-{{getId}}">
+                    <div class="small-3 columns">
+                        <div class="tokenLogoFrame">
+                            <img src="{{getMenuImage}}" alt="">
+                        </div>
+                    </div>
+                    <div class="small-9 columns">
+                        <div class="tokenFrame">
+                            <p>{{getName}}</p>
+                        </div>
+                        <div class="tokenFrameSelected">
+                            <p>
+                                <span class="tokenCode">{{getOtp}}</span><br>
+                                <span class="tokenTimeRemaining">Expires in <span class="labelSecondsRemaining">{{timeRemaining}}</span> seconds</span>
+                            </p>
+                            <button class="button-rounded-blue copy">Copy</button>
+                        </div>
+                        <div class="tokenFramePhishingAlert">
+                            <p>
+                                <img src="/img/alert_icon.png">Phishing Alert
+                            </p>
+                            <button class="button-blue showAnyway">Show token anyway</button>
+                        </div>
+                    </div>
+                </div>
+            {{/isDecrypted}}
+
+            {{! This will be rendered if the app is encrypted}}
+            {{^isDecrypted}}
+                <div class="token" data-token-id={{getId}} id="token-{{getId}}">
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <div class="tokenLogoFrame">
+                                <img src="{{getMenuImage}}" alt="">
+                            </div>
+                        </div>
+                        <div class="small-9 columns">
+                            <div class="tokenFrame">
+                                <p class="encrypted">{{getName}}</p>
+                                <img class="encryptedLogo" src="img/tokens-screen/encrypted_icon.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="tokenEncrypted">
+                            <p class="labelEncrypted">This account is encrypted</p>
+                            <p class="labelPromptPassword">Enter your backups password</p>
+                            <div id="passwordDecryptAccounts">
+                                <input type="password" class="holo" data-password-label>
+                                <div id="borderInputDecryptAccounts"></div>
+                            </div>
+                            <button class="button-decrypt">Decrypt Account</button>
+                        </div>
+                    </div>
+                </div>
+            {{/isDecrypted}}
+        {{/apps}}
+        {{! This will be rendered if there are no apps}}
+        {{^apps}}
+            <div class="no-apps-screen" >
+                <div class="inner">
+                    <div class="noAppsLabel">
+                        You don't have any accounts. Add your first
+                    </div>
+                    <div class="noAppsAddLogo">
+                        <img id="btnAddApp" src="img/tokens-screen/add_btn.png" alt="">
+                    </div>
+                </div>
+            </div>
+        {{/apps}}
+    </div>
+</div>

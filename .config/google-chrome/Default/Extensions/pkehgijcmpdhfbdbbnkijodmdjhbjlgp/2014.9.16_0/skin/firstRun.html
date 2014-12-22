@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+  - This file is part of Adblock Plus <http://adblockplus.org/>,
+  - Copyright (C) 2006-2013 Eyeo GmbH
+  -
+  - Adblock Plus is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU General Public License version 3 as
+  - published by the Free Software Foundation.
+  -
+  - Adblock Plus is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License
+  - along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<html>
+  <head>
+    <title class="i18n_firstRun_title"></title>
+    <meta charset="utf-8">
+  <style>
+    body {
+      margin: 0;
+      background: url("/skin/background.png");
+      color: #ccc;
+      font-family: Arial, Gadget, sans-serif;
+    }
+    .maintext {
+      font-size: 18px;
+      width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align:justify;
+      text-justify:inter-word;
+      font-weight:normal; } h3 {
+      font-size: 36px;
+      color: #eee;
+      font-weight: bold;
+    }
+    #social-links{ 
+      width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align:center;
+      font-weight:normal;
+    }
+
+    #social-links img{
+      margin: 20px;
+    }
+    #badger-header{
+      background-image: url("/skin/background_honeycomb.png");
+      background-position: bottom center;
+      background-size: 97.5px;
+      width: 100%;
+    }
+    #badger-header-fringe{
+      background-image: url("/skin/background_honeycomb_fringe2.png");
+      background-repeat: repeat-x;
+      background-position: top center;
+      background-size: 97.5px;
+      height: 100px;
+    }
+    #badger-header-wrapper {
+      background-position: left 10px;
+      padding-top: 10px;
+      padding-left: 85px;
+      min-height: 170px;
+      margin: 0 auto;
+      width: 700px;
+      background-image: url(/skin/firstrun-logo.png);
+      background-repeat: no-repeat;
+      text-align: center;
+      -webkit-filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.5));
+      filter: url(#drop-shadow);
+    }
+    #header-banner-img{
+      height: 125px;
+      margin-top: 30px;
+      position: relative;
+      right: -65px;
+    }
+  </style>
+  </head>
+  <body>
+    <!-- <object style: "align:center" src="Mad_scientist_bw.svg" type="image/svg+xml" /> -->
+      <div id="badger-header">
+        <div id="badger-header-wrapper" style="max-width: 608px"> <a href="https://www.eff.org/"><img id="header-banner-img" src="/skin/badger-1st-run-banner-1.png"></a> </div>
+      </div>
+      <div id="badger-header-fringe">&nbsp;</div>
+
+    <div class="maintext">
+
+      <p style="font-size: 24px; font-weight: bold;">Privacy Badger blocks spying ads and invisible trackers.  It's there to
+      ensure that companies can't track your browsing without your consent.</p> 
+
+      <p>This extension is designed to automatically protect your privacy from
+      third party trackers that load invisibly when you browse the web. We
+      send the Do Not Track header with each request, and our extension
+      evaluates the likelihood that you are still being tracked. If the
+      algorithm deems the likelihood is too high, we automatically block your
+      request from being sent to the domain. Please understand that Privacy
+      Badger is in beta, and the algorithm's determination is not conclusive
+      that the domain is tracking you.</p>
+
+      <p>Our extension has three states. <span
+      style="color:red;font-weight:bold;">Red</span> means Privacy Badger
+      believes this domain is a tracker, and has blocked it. <span
+      style="color:yellow;font-weight:bold;">Yellow</span> means the domain is
+      believed to be both a tracker and necessary for the functioning of the
+      page, so Privacy Badger is allowing it but blocking its cookies. <span
+      style="color:green;font-weight:bold;">Green</span> means that Privacy
+      Badger believes this is not tracker. You can click on the Privacy Badger
+      icon in your browser's toolbar if you wish to override the automatic
+      blocking settings. Or, you can browse in peace as Privacy Badger starts
+      finding and eating up web trackers one by one.</p>
+
+      <p>Nothing can stop the Privacy Badger from eating cookies when it's
+      hungry!</p>
+
+      <p>Privacy Badger is a project of the Electronic Frontier Foundation.</p>
+
+    </div>
+    <div id="social-links">
+      <h3>Let the world know that you are taking a stand against online tracking</h3>
+        <a target=_blank href="https://twitter.com/home?status=I%20just%20installed%20Privacy%20Badger%2C%20a%20new%20tool%20from%20EFF%20to%20stop%20companies%20from%20spying%20on%20your%20browsing%20habits%20-%20https%3A%2F%2Feff.org%2Fprivacybadger" title="Share on Twitter"><img src="/skin/twitter48.png" alt="Share on Twitter" title="Share on Twitter"></a> 
+        <a href="https://www.facebook.com/share.php?u=https%3A%2F%2Feff.org%2Fprivacybadger" target=_blank>
+          <img src="/skin/facebook48.png" alt="Share on Facebook" title="Share on Facebook">
+        </a>
+        <a href="https://plus.google.com/share?url=https%3A%2F%2Feff.org%2Fprivacybadger" target=_blank>
+          <img src="/skin/gplus48.png" alt="Share on Google Plus" title="Share on Google Plus">
+        </a>
+    </div>
+  </body>
+</html>
+ 

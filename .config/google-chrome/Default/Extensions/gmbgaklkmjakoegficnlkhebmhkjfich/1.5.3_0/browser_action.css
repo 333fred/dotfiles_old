@@ -1,0 +1,248 @@
+* {
+  box-sizing: border-box;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+body {
+  background: #e5e5e5;
+  font-size: 14px;
+  height: 480px;
+  overflow-y: scroll;
+  width: 300px;
+  line-height: 18px;
+}
+
+textarea {
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+  padding: 4px;
+}
+
+header {
+  margin-bottom: 12px;
+}
+
+.popup-title a {
+  color: #333;
+  font-size: 18px;
+  font-weight: 100;
+  outline: none;
+  text-decoration: none;
+}
+
+#action-bar {
+  float: right;
+}
+
+#action-bar img {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+}
+
+#announcements {
+  background: #efefef;
+  color: #333;
+  display: none;
+  padding: 4px;
+  text-decoration: none;
+  width: 100%;
+}
+
+#error {
+  padding: 72px 12px;
+  text-align: center;
+  width: 100%;
+}
+
+#error p {
+  margin-bottom: 36px;
+}
+
+#error,
+#quick-add {
+  display: none;
+}
+
+#authorization_required {
+  cursor: pointer;
+}
+
+#event-title {
+  width: 100%;
+}
+
+#quick-add-event-title {
+  width: 100%;
+}
+
+.quick-add-buttons {
+  text-align: right;
+}
+
+.date-header {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 300;
+  margin: 12px 0 0 0;
+  padding: 4px 0;
+}
+
+.date-header:first-child,
+.date-header:nth-child(2) {
+  margin: 0;
+}
+
+.no-events-today {
+  color: #333;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.event {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  font-weight: 300;
+  margin: 0 0 4px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.start-time {
+  color: #fff;
+  flex: 0 0 66px;
+  font-size: 12px;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.start-and-end-times {
+  color: #888;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.detected-event .start-time {
+  background-color: #fff;
+  text-align: left;
+}
+
+.detected-event .start-time img {
+  margin: 6px 18px;
+}
+
+.event-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.start-time,
+.event-details {
+  margin: 0;
+  padding: 6px;
+}
+
+.event-title {
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.start-time,
+.event-title {
+  font-weight: 300;
+  line-height: 16px;
+  vertical-align: text-bottom;
+}
+
+.all-day:not(.detected-event) .start-time {
+  flex-basis: 6px;
+  padding: 0;
+}
+
+.all-day:not(.detected-event) .event-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.all-day:not(.detected-event) .event-title {
+  font-size: 13px;
+}
+
+.location-icon,
+.video-call-icon {
+  float: right;
+  height: 15px;
+  padding: 0 3px;
+  width: 21px;
+}
+
+.kd-button {
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#4787ed));
+  background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
+  background-image:         linear-gradient(top,#4d90fe,#4787ed);
+  border-color: #3079ed;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.1);
+  color: #fff;
+  cursor: default;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 18px;
+  min-width: 54px;
+  padding: 4px 8px;
+  text-align: center;
+  -webkit-transition: all 0.218s;
+          transition: all 0.218s;
+}
+
+.kd-button:hover {
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
+  background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
+  background-image:         linear-gradient(top,#4d90fe,#357ae8);
+  border-color: #2f5bb7;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-transition: all 0.0s;
+          transition: all 0.0s;
+}
+
+.kd-button:active {
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.kd-button:focus {
+  border: 1px solid #4d90fe;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
+  outline: none;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  -webkit-animation-name: spin;
+          animation-name: spin;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
