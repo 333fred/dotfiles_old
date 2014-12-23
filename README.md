@@ -10,6 +10,7 @@ This is a set of various configuration changes that I've made to my system which
   * ~~[DMenu](#dmenu)~~
   * [i3status](#i3status)
   * [Wallpapers](#wallpaper)
+  * [Media](#media)
 * [Redshift](#redshift)
 * [Synaptics Configs](#synaptics-configs)
 * [Thinkpad Modifications](#thinkpad-modifications)
@@ -59,6 +60,9 @@ The .i3config file should go in ~/, and will be autodetected by i3status if ther
 
 ## Wallpaper
 Wallpapers are set randomly every 10 minutes from the ~/.wallpapers folder. This is done with a shell script run at i3 start by the i3 config. Configuration is done with a program called feh.
+
+## Media
+Media control is done via the playerctl library. This can be found here: https://github.com/acrisci/playerctl. It is available as a package in the AUR if on Arch.
 
 ## Redshift
 I'm using redshift gtk in the manual location mode. Geoclue doesn't seem to work all the time, it has trouble finding my location. Redshift-gtk is exec'd by i3 on login.
