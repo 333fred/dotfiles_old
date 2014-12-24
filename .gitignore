@@ -8,3 +8,5 @@ hotkeys/
 keepassx/
 pulse/
 spotify/
+.emacs.d/
+.config/gtk-2.0/

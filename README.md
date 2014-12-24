@@ -3,10 +3,11 @@ This is a set of various configuration changes that I've made to my system which
 
 ## Programs:
 * [Emacs](#emacs)
-  * [OmniSharp](#omnisharp)
   * [gocode](#gocode)
+  * [Daemon](#daemon)
 * [i3](#i3)
-  * [Mutate](#mutate)
+  * [Synapse](#synapse)
+  * ~~[Mutate](#mutate)~~
   * ~~[DMenu](#dmenu)~~
   * [i3status](#i3status)
   * [Wallpapers](#wallpaper)
@@ -16,27 +17,32 @@ This is a set of various configuration changes that I've made to my system which
 * [Thinkpad Modifications](#thinkpad-modifications)
 
 ## Emacs
-Emacs config list located in .emacs and .emacs.d/. Additional files that should be created or linked are .ido.last and .smex-items. There a quite a few plugins enabled, but the highlights are:
+My Emacs config has been totally redone to be relatively nice, readable, and well-commented. It is heavily customized and uses many custom Evil-Leader shortcuts for working with helm. The config can take some time to load, so using emacs as a daemon is recommended. Some of the plugins enabled are: 
 * EVIL Mode
 * Flycheck, with plugins for several languages
-* CSharp Mode
-* auto-complete-mode, with plugins for several languages
-* naquadah theme
-* ido-mode
-* smex-mode
-* org-mode
-* omnisharp
-
-## Omnisharp
-company-mode and flycheck use omnisharp to do C# completion, checking, and basically all other IDE features. Omnisharp server can be found here: https://github.com/OmniSharp/. On Ubuntu, Omnisharp needs the PPA specified in the omnisharp-server project, and the packages: monodevelop-current, mono-xbuild, and mono-devel.
+* Helm
+* Projectile, with helm integration
+* smartparens
+* company-mode, with extensions for rust and go
 
 ## gocode
 For go autocompletion, gocode needs to be installed. It can be found here: https://github.com/nsf/gocode
 
+## Daemon
+I run emacs as a daemon to take care of any nascent performance issues. I insert
+```bash
+emacs --daemon
+```
+to my /etc/profile, and then I created a .desktop file to run the client from synapse.
+
 ## i3 
 i3 config is located .i3/config. My i3 is themed to go with the Numix Theme, found here: https://numixproject.org/. I'm enabling the cinnamon-settings-daemon on startup to ensure my gtk theme settings are appropriately applied across all applications.
 
-## Mutate
+## Synapse
+I am currently using synapse as my launcher. The configuration is located in .config, as always. Until I move onto the next launcher, I suppose.
+
+## ~~Mutate~~
+**Mutate has been deprecated as well. I am now using synapse, which is even better than Mutate**
 Mutate is a Spotlight-like launcher for Linux. I like it for being much more feature filled than DMenu. It has its own github, which can be found here: https://github.com/qdore/Mutate. This is easily installed in Ubuntu via the ppa, but it will compile the source to install it, which has dependencies on qt. If dmenu is preferred, you can comment out the exec of mutate and uncomment the dmenu binding. Mutate has been bound to win+d, just like dmenu was.
 
 ## ~~DMenu~~
