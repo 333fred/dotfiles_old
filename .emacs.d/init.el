@@ -9,7 +9,7 @@
 (defvar my-packages '(magit naquadah-theme goto-last-change git-gutter smart-mode-line smart-mode-line-powerline-theme neotree ;; General packages
 			    async helm projectile helm-projectile helm-projectile-all helm-flyspell ;; Anything to do with helm 
 			    evil evil-leader evil-surround undo-tree ;; Anything to do with evil
-			    go-mode racket-mode gitignore-mode markdown-mode smartparens ;; General programming packages
+			    go-mode go-eldoc racket-mode gitignore-mode markdown-mode smartparens ;; General programming packages
                             company company-go company-c-headers helm-company ;; Company mode plugins
                             flycheck flycheck-color-mode-line helm-flycheck flycheck-rust ;; Flycheck plugins
 			    ))

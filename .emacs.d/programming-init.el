@@ -15,6 +15,10 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
+;; Go mode eldoc, for displaying go documentation
+(add-hook 'go-mode-hook 'go-eldoc-setup)
+(add-hook 'before-save-hook 'gofmt-before-save)
+
 ;; Git gutter allows for showing changes on the side of a file
 (global-git-gutter-mode +1)
 
