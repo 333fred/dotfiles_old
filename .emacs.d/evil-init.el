@@ -1,10 +1,19 @@
 ;; -*- lexical-binding: t -*-
-(require 'evil)
-(evil-mode 1)
-(require 'undo-tree)
-(global-undo-tree-mode)
-(global-evil-leader-mode)
-(evil-leader/set-key "e" 'find-file)
+(use-package evil
+             :init (evil-mode 1))
+(use-package undo-tree
+             :init (global-undo-tree-mode))
+(use-package evil-leader
+             :init
+             (progn
+               (global-evil-leader-mode)
+               (evil-leader/set-key 
+                 "e" 'find-file
+                 "x" (kbd "C-x")
+                 "k" 'kill-buffer
+                 "z" 'repeat)))
+(use-package evil-surround
+             :init (global-evil-surround-mode))
 ;; Note: lexical-binding must be t in order for this to work correctly.
 (defun make-conditional-key-translation (key-from key-to)
   "Make a Key Translation such that if the translate-keys-p function returns true,
@@ -27,8 +36,6 @@
   (progn
     (require 'helm-projectile)
     (evil-leader/set-key
-      "f" 'helm-for-files
-      "l" 'helm-locate
       "c" 'helm-flycheck
       "y" 'helm-show-kill-ring
       "t" 'helm-top
@@ -48,7 +55,6 @@
     "s" 'git-gutter:stage-hunk
     "n" 'git-gutter:next-hunk
     "p" 'git-gutter:previous-hunk))
-(evil-leader/set-key
-  "x" (kbd "C-x")
-  "k" 'kill-buffer
-  "z" 'repeat)
+(eval-after-load 'iedit
+  (evil-leader/set-key
+    "r" 'iedit-mode))

@@ -15,39 +15,108 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
+;; Highlight fixme and other such words
+(defun my/add-watchwords ()
+  "Highlight FIXME, TODO, and NOCOMMIT in code"
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIXME\\|TODO\\|NOCOMMIT\\)\\>"
+          1 '((:foreground "#d7a3ad") (:weight bold)) t))))
+
+(add-hook 'prog-mode-hook 'my/add-watchwords)
+
 ;; Go mode eldoc, for displaying go documentation
 (add-hook 'go-mode-hook 'go-eldoc-setup)
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; Git gutter allows for showing changes on the side of a file
-(global-git-gutter-mode +1)
+(use-package git-gutter
+             :diminish ""
+             :init (global-git-gutter-mode +1))
+
+;; Magit setup
+(use-package magit)
+
+;; anzu, shows the number of hits in the modeline
+(use-package anzu)
+(add-hook 'prog-mode-hook (lambda () (global-anzu-mode t)))
 
 ;; Smart parens
-(require 'smartparens-config)
+(use-package smartparens)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (smartparens-global-mode t)
+            (show-smartparens-global-mode t)))
+
+;; IEdit mode
+(use-package iedit)
+
 
 ;; Company Mode Setup
-(require 'company)
+(use-package company
+  :config
+  (progn
+    (use-package company-go)
+    (setq company-idle-delay 0.2
+          ;; min prefix of 2 chars
+          company-minimum-prefix-length 2
+          company-selection-wrap-around t
+          company-show-numbers t
+          company-dabbrev-downcase nil
+          company-echo-delay 0
+          company-tooltip-limit 20
+          company-transformers '(company-sort-by-occurrence)
+          company-begin-commands '(self-insert-command)
+          )))
+(use-package company-c-headers)
+
 (add-hook 'after-init-hook 'global-company-mode)
 (add-to-list 'company-backends 'company-c-headers)
-(eval-after-load 'company
-  '(progn
-     (define-key company-mode-map (kbd "C-:") 'helm-company)
-     (define-key company-active-map (kbd "C-:") 'helm-company)))
-(setq company-tooltip-limit 20)                      ; bigger popup window
-(setq company-idle-delay .1)                         ; decrease delay before autocompletion popup shows
-(setq company-echo-delay 0)                          ; remove annoying blinking
-(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
 
 ;; Flycheck Setup
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(use-package flycheck
+             :diminish "fc"
+             :idle (global-flycheck-mode))
 (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
 (eval-after-load 'flycheck
   '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
+(use-package flycheck-rust)
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
-;; Markdown mode
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+;; Racket mode
+(use-package racket-mode)
+
+;; Smart-tab setup
+(use-package smart-tab)
+(add-hook 'prog-mode-hook (lambda () (global-smart-tab-mode 1)))
+
+;; All the java modes
+(use-package javap-mode)
+(use-package gradle-mode)
+(use-package groovy-mode)
+
+;; Malabar Mode
+(add-hook 'java-mode-hook
+          (lambda ()
+            (use-package malabar-mode)
+            (malabar-mode 1)))
+
+(eval-after-load 'inf-groovy
+  (add-hook 'inf-groovy-load-hook 'flycheck-mode))
+(eval-after-load 'java-mode
+  (add-hook 'java-mode-hook   'flycheck-mode))
+
+;; Markdown/yaml mode
+(use-package markdown-mode)
+(use-package yaml-mode)
+
+;; Eldoc
+(use-package eldoc
+  :config
+  (progn
+    (use-package diminish
+      :init
+      (progn (diminish 'eldoc-mode "ed")))
+    (setq eldoc-idle-delay 0.2)
+    (set-face-attribute 'eldoc-highlight-function-argument nil
+                        :underline t :foreground "green"
+                        :weight 'bold)))
