@@ -47,7 +47,8 @@
       "h" 'helm-projectile-find-file
       "H" 'helm-projectile
       "a" 'helm-flyspell-correct
-      "d" 'helm-company)))
+      "d" 'helm-company
+      "f" 'helm-gtags-dwim)))
 (eval-after-load "magit"
   (evil-leader/set-key "g" 'magit-status))
 (eval-after-load "git-gutter-mode"

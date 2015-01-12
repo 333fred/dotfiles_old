@@ -3,6 +3,7 @@ This is a set of various configuration changes that I've made to my system which
 
 ## Programs:
 * [Emacs](#emacs)
+  * [CEDET](#cedet)
   * [gocode](#gocode)
   * [Daemon](#daemon)
 * [i3](#i3)
@@ -24,6 +25,9 @@ My Emacs config has been totally redone to be relatively nice, readable, and wel
 * Projectile, with helm integration
 * smartparens
 * company-mode, with extensions for rust and go
+
+## CEDET
+CEDET is used for semantic code completion, and configuration for the WPILib projects is located in cedet-projects.el. CEDET must be downloaded from the source and put into .emacs.d/site-lisp/cedet. Make sure to run make in the CEDET directory, and update wpilib-dir to the location of the allwpilib directory.
 
 ## gocode
 For go autocompletion, gocode needs to be installed. It can be found here: https://github.com/nsf/gocode

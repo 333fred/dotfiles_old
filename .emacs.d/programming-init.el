@@ -93,12 +93,12 @@
 (use-package javap-mode)
 (use-package gradle-mode)
 (use-package groovy-mode)
-
-;; Malabar Mode
-(add-hook 'java-mode-hook
-          (lambda ()
-            (use-package malabar-mode)
-            (malabar-mode 1)))
+(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
+(add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
+(add-hook 'groovy-mode-hook
+          '(lambda ()
+             (use-package 'groovy-electric)
+             (groovy-electric-mode)))
 
 (eval-after-load 'inf-groovy
   (add-hook 'inf-groovy-load-hook 'flycheck-mode))
@@ -108,6 +108,15 @@
 ;; Markdown/yaml mode
 (use-package markdown-mode)
 (use-package yaml-mode)
+
+;; ggtags setup
+(use-package ggtags)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (progn
+                (ggtags-mode 1)
+                (setq-local eldoc-documentation-function #'ggtags-eldoc-function)))))
 
 ;; Eldoc
 (use-package eldoc
@@ -120,3 +129,11 @@
     (set-face-attribute 'eldoc-highlight-function-argument nil
                         :underline t :foreground "green"
                         :weight 'bold)))
+
+;; Function args (completion with semantic)
+(use-package function-args
+  :config
+  (progn
+    (fa-config-default)
+    (define-key c-mode-map  [(control tab)] 'moo-complete)
+    (define-key c++-mode-map  [(control tab)] 'moo-complete)))

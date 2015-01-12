@@ -32,12 +32,12 @@
 
     ;; Helm
     async helm projectile helm-projectile helm-projectile-all helm-flyspell
-    helm-company helm-flycheck helm-ag
+    helm-company helm-flycheck helm-ag helm-gtags
     
     ;; Editing tools
     neotree smartparens goto-last-change undo-tree iedit smart-tab anzu
     simple-call-tree simple-call-tree+ volatile-highlights golden-ratio
-    anaphora 
+    anaphora ggtags function-args
     
     ;; Go
     go-mode company-go go-eldoc
@@ -52,7 +52,7 @@
     auctex
     
     ;; Java
-    malabar-mode groovy-mode javap-mode gradle-mode 
+    groovy-mode javap-mode gradle-mode 
     
     ;; Racket
     racket-mode
@@ -82,6 +82,9 @@
 
 ;; Set up use-package for all other files
 (require 'use-package)
+
+;; Load projects
+(load "~/.emacs.d/cedet-projects.el")
 
 ;; General emacs config
 (load "~/.emacs.d/general-init.el")

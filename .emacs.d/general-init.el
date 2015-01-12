@@ -8,6 +8,7 @@
 (prefer-coding-system 'utf-8)
 
 (set-frame-font "Source Code Pro 10")
+(setq default-frame-alist '((font . "Source Code Pro")))
 (use-package naquadah-theme)
 
 ;; Remove the extra ui
@@ -98,8 +99,10 @@
   :diminish golden-ratio-mode
   :defer t
   :config
-  (setq golden-ratio-exclude-modes
-        '(erc-mode mu4e-headers-mode mu4e-view-mode)))
+  (progn
+    (setq golden-ratio-exclude-modes
+          '(erc-mode mu4e-headers-mode mu4e-view-mode))
+    (golden-ratio-mode 1)))
 
 ;; Undo-tree
 (use-package undo-tree
