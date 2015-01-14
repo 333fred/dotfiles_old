@@ -7,13 +7,27 @@
   :config
   (progn
     (global-semanticdb-minor-mode 1)
+    (global-semantic-mru-bookmark-mode 1)
+    (global-cedet-m3-minor-mode 1)
+    (global-semantic-highlight-func-mode 1)
+    (global-semantic-stickyfunc-mode 1)
+    (global-semantic-decoration-mode 1)
+    (global-semantic-idle-local-symbol-highlight-mode 1)
     (global-semantic-idle-scheduler-mode 1)
+    (global-semantic-idle-completions-mode 1)
+    (global-semantic-idle-summary-mode 1)
+    (global-semantic-show-unmatched-syntax-mode 1)
+    (global-semantic-show-parser-state-mode 1)
+    (global-semantic-highlight-edits-mode 1)
+    (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+    (use-package semantic/ia)
+    (use-package semantic/db-javap)
+    (when (cedet-gnu-global-version-check t)
+      (semanticdb-enable-gnu-global-databases 'c-mode)
+      (semanticdb-enable-gnu-global-databases 'c++-mode)
+      (semanticdb-enable-gnu-global-databases 'java-mode))
+    (semantic-mode 1)
     ))
-(semantic-mode 1)
-(use-package semantic/canned-configs)
-(use-package semantic/ia)
-(use-package semantic/db-javap)
-(semantic-load-enable-code-helpers)
 
 ;; EDE
 ;; This needs to have the cedet-projects.el file in ~/.emacs.d/ set up and
@@ -21,68 +35,86 @@
 (use-package ede
   :config
   (progn
+    (use-package ede/java-root)
     (global-ede-mode 1)))
-(use-package ede/java-root)
 
 (defvar wpilib-dir "/home/fred/first/allwpilib/")
 (defvar frc-toolchain-include-dir "/usr/arm-frc-linux-gnueabi/include/c++/4.9.1/")
+
+;; Maven default directories
+(defvar jm "src/main/java")
+(defvar jt "src/test/java")
+
+;; Function for prepending a string to a list of strings and returning the new list
+(defun prepend (pre l)
+  (if l
+      (cons (concat pre (car l)) (prepend pre (cdr l)))
+    nil))
+
 ;; Include directories for the HAL
-(defvar hal-includes '((concat wpilib-dir "hal/include")
-                       (concat wpilib-dir "hal/lib/Athena")
-                       (concat wpilib-dir "hal/lib/Athena/FRC_FPGA_ChipObject")
-                       (concat wpilib-dir "hal/lib/Athena/NetworkCommunication")
-                       (concat wpilib-dir "hal/lib/Athena/ctre")
-                       (concat wpilib-dir "hal/lib/Athena/i2clib")
-                       (concat wpilib-dir "hal/lib/Athena/spilib")))
+(defvar hal-includes (list "/include"
+                           "/lib/Athena"
+                           "/lib/Athena/FRC_FPGA_ChipObject"
+                           "/lib/Athena/NetworkCommunication"
+                           "/lib/Athena/ctre"
+                           "/lib/Athena/i2clib"
+                           "/lib/Athena/spilib"))
+
+(defvar global-hal-includes (prepend "/hal" hal-includes))
 
 ;; Include directories for the networktables projects
-(defvar nettables-includes '((concat wpilib-dir "networktables/cpp/include")))
-(defvar nettables-java-root '((concat wpilib-dir "networktables/java/src/main/java")))
+(defvar nettables-includes (list "/networktables/cpp/include"))
+(defvar nettables-java-root "/networktables/java/src/main/java")
 
 ;; Include Directories for the wpilibc projects
-(defvar wpilibc-includes '((concat wpilib-dir "wpilibc/wpilibC++/include")))
-(defvar wpilibcdevices-includes '((concat wpilib-dir "wpilibc/wpilibC++Devices/include")))
+(defvar wpilibc-includes (list "/wpilibc/wpilibC++/include"))
+(defvar wpilibcdevices-includes (list "/wpilibc/wpilibC++Devices/include"))
 
 ;; Root Directories for the WPILibJ projects
-(defvar wpilibj-root '((concat wpilib-dir "wpilibj/wpilibJava/src/main/java")))
-(defvar wpilibjdev-root '((concat wpilib-dir "wpilibj/wpilibJavaDevices/src/main/java")
-                          (concat wpilib-dir "wpilibj/wpilibJavaDevices/src/test/java")))
+(defvar wpilibj-root "/wpilibj/wpilibJava/src/main/java")
+(defvar wpilibjdev-root (list "/wpilibj/wpilibJavaDevices/src/main/java"
+                              "/wpilibj/wpilibJavaDevices/src/test/java"))
 ;; TODO: When we move to gradle, this hack won't be necessary. This is because the JNI
 ;; headers are generated in the target/include directory. This unfortunately means that
 ;; maven has to have run before the completion can execute
-(defvar wpilibjni-includes '((concat wpilib-dir "wpilibj/wpilibJavaJNI/target/include")))
-(defvar wpilibjavait-root '((concat wpilib-dir "wpilibj/wpilibJavaIntegrationTests/src/main/java")
-                            (concat wpilib-dir "wpilibj/wpilibJavaIntegrationTests/src/test/java")))
+(defvar wpilibjni-includes (list "/wpilibj/wpilibJavaJNI/target/include"))
+(defvar wpilibjavait-root (list "/wpilibj/wpilibJavaIntegrationTests/src/main/java"
+                            "/wpilibj/wpilibJavaIntegrationTests/src/test/java"))
 
 (ede-cpp-root-project "HAL"
                       :file (concat wpilib-dir "hal/CMakeLists.txt")
                       :include-path hal-includes
-                      :system-include-path '(frc-toolchain-include-dir))
+                      :system-include-path (list frc-toolchain-include-dir))
 (ede-cpp-root-project "NetworkTablesCpp"
                       :file (concat wpilib-dir "networktables/cpp/CMakeLists.txt")
-                      :include-path (append hal-includes nettables-includes)
-                      :system-include-path '(frc-toolchain-dir))
+                      :include-path (cons "include" (prepend "/../.." global-hal-includes))
+                      :system-include-path (list frc-toolchain-include-dir))
 (ede-java-root-project "NetworkTablesJava"
                        :file (concat wpilib-dir "networktables/java/pom.xml")
-                       :srcroot (cons (concat wpilib-dir "networktables/java/src/test/java") nettables-java-root))
+                       :srcroot (list jm jt))
 (ede-cpp-root-project "WPILibC"
                       :file (concat wpilib-dir "wpilibc/wpilibC++/CMakeLists.txt")
-                      :include-path (append hal-includes nettables-includes wpilibc-includes)
-                      :system-include-path '(frc-toolchain-include-dir))
+                      :include-path (cons "/include" (append (prepend "/../.." global-hal-includes) (prepend "/../.." nettables-includes)))
+                      :system-include-path (list frc-toolchain-include-dir))
 (ede-cpp-root-project "WPILibCDevices"
                       :file (concat wpilib-dir "wpilibc/wpilibC++Devices/CMakeLists.txt")
-                      :include-path (append hal-includes nettables-includes wpilibc-includes wpilibcdevices-includes)
-                      :system-include-path '(frc-toolchain-include-dir))
+                      :include-path (cons "/include" (append (prepend "/../.." global-hal-includes)
+                                                             (prepend "/../.." nettables-includes)
+                                                             (prepend "/../.." wpilibc-includes)))
+                      :system-include-path (list frc-toolchain-include-dir))
 (ede-java-root-project "WPILibJ"
                        :file (concat wpilib-dir "wpilibj/wpilibJava/pom.xml")
-                       :srcroot (append wpilibj-root nettables-java-root))
+                       :srcroot (list jm (concat "/../.." nettables-java-root)))
 (ede-java-root-project "WPILibJDevices"
                        :file (concat wpilib-dir "wpilibj/wpilibJavaDevices/pom.xml")
-                       :srcroot (append wpilibjdev-root wpilibj-root nettables-java-root))
+                       :srcroot (list jm jt (concat "/../.." wpilibj-root) (concat "/../.." nettables-java-root)))
 (ede-cpp-root-project "WPILibJavaJNI"
                        :file (concat wpilib-dir "wpilibj/wpilibJavaJNI/CMakeLists.txt")
-                       :include-path wpilibjni-includes ;; TODO: When we move to gradle
-                       :system-include-path '(frc-toolchain-include-dir))
+                       :include-path (list "/target/include") ;; TODO: When we move to gradle
+                       :system-include-path (list frc-toolchain-include-dir))
 (ede-java-root-project "WPILibJavaIntegrationTests"
                        :file (concat wpilib-dir "wpilibj/wpilibJavaIntegrationTests/pom.xml")
-                       :srcroot (append wpilibjavait-root wpilibjdev-root wpilibj-root nettables-java-root))
+                       :srcroot (append (list jm jt
+                                              (concat "/../.." nettables-java-root)
+                                              (concat "/../.." wpilibj-root))
+                                        (prepend "/../.." wpilibjdev-root)))

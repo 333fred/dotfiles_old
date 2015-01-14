@@ -56,6 +56,8 @@
   :config
   (progn
     (use-package company-go)
+    (define-key company-mode-map [(control tab)] 'helm-company)
+    (define-key company-active-map [(control tab)] 'helm-company)
     (setq company-idle-delay 0.2
           ;; min prefix of 2 chars
           company-minimum-prefix-length 2
@@ -71,6 +73,9 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 (add-to-list 'company-backends 'company-c-headers)
+(add-hook 'rust-mode-hook
+          (lambda ()
+            (setq-local company-backends '((company-keywords company-gtags company-dabbrev-code company-files company-dabbrev)))))
 
 ;; Flycheck Setup
 (use-package flycheck
@@ -134,6 +139,4 @@
 (use-package function-args
   :config
   (progn
-    (fa-config-default)
-    (define-key c-mode-map  [(control tab)] 'moo-complete)
-    (define-key c++-mode-map  [(control tab)] 'moo-complete)))
+    (fa-config-default)))
