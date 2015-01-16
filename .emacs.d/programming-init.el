@@ -15,6 +15,9 @@
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
+;; Remove all trailing whitespace before save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; Highlight fixme and other such words
 (defun my/add-watchwords ()
   "Highlight FIXME, TODO, and NOCOMMIT in code"
@@ -50,7 +53,6 @@
 ;; IEdit mode
 (use-package iedit)
 
-
 ;; Company Mode Setup
 (use-package company
   :config
@@ -73,9 +75,14 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 (add-to-list 'company-backends 'company-c-headers)
-(add-hook 'rust-mode-hook
-          (lambda ()
-            (setq-local company-backends '((company-keywords company-gtags company-dabbrev-code company-files company-dabbrev)))))
+;; Semantic doesn't fail quietly, it prevents any completions from working
+;; Remove it from the global list and only add it locally to c, c++, and java
+(delete 'company-semantic company-backends)
+(defun add-semantic-complete ()
+  (setq-local company-backends (cons 'company-semantic company-backends)))
+(add-hook 'c-mode (lambda () (add-semantic-complete)))
+(add-hook 'c++-mode (lambda () (add-semantic-complete)))
+(add-hook 'java-mode (lambda () (add-semantic-complete)))
 
 ;; Flycheck Setup
 (use-package flycheck
@@ -140,3 +147,11 @@
   :config
   (progn
     (fa-config-default)))
+
+;; Load Verilog mode
+(load "~/.emacs.d/verilog-mode.el")
+(use-package verilog-mode)
+;; Any files that end in .v, .dv or .sv should be in verilog mode
+(add-to-list 'auto-mode-alist '("\\.[ds]?v\\'" . verilog-mode))
+;; Any files in verilog mode should have their keywords colorized
+(add-hook 'verilog-mode-hook '(lambda () (font-lock-mode 1)))
