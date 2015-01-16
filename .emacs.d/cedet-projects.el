@@ -7,18 +7,12 @@
   :config
   (progn
     (global-semanticdb-minor-mode 1)
-    (global-semantic-mru-bookmark-mode 1)
-    (global-cedet-m3-minor-mode 1)
     (global-semantic-highlight-func-mode 1)
     (global-semantic-stickyfunc-mode 1)
     (global-semantic-decoration-mode 1)
-    (global-semantic-idle-local-symbol-highlight-mode 1)
     (global-semantic-idle-scheduler-mode 1)
-    (global-semantic-idle-completions-mode 1)
     (global-semantic-idle-summary-mode 1)
-    (global-semantic-show-unmatched-syntax-mode 1)
     (global-semantic-show-parser-state-mode 1)
-    (global-semantic-highlight-edits-mode 1)
     (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
     (use-package semantic/ia)
     (use-package semantic/db-javap)
