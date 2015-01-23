@@ -75,40 +75,58 @@
 (defvar wpilibjavait-root (list "/wpilibj/wpilibJavaIntegrationTests/src/main/java"
                             "/wpilibj/wpilibJavaIntegrationTests/src/test/java"))
 
-(ede-cpp-root-project "HAL"
-                      :file (concat wpilib-dir "hal/CMakeLists.txt")
-                      :include-path hal-includes
-                      :system-include-path (list frc-toolchain-include-dir))
-(ede-cpp-root-project "NetworkTablesCpp"
-                      :file (concat wpilib-dir "networktables/cpp/CMakeLists.txt")
-                      :include-path (cons "include" (prepend "/../.." global-hal-includes))
-                      :system-include-path (list frc-toolchain-include-dir))
-(ede-java-root-project "NetworkTablesJava"
-                       :file (concat wpilib-dir "networktables/java/pom.xml")
-                       :srcroot (list jm jt))
-(ede-cpp-root-project "WPILibC"
-                      :file (concat wpilib-dir "wpilibc/wpilibC++/CMakeLists.txt")
-                      :include-path (cons "/include" (append (prepend "/../.." global-hal-includes) (prepend "/../.." nettables-includes)))
-                      :system-include-path (list frc-toolchain-include-dir))
-(ede-cpp-root-project "WPILibCDevices"
-                      :file (concat wpilib-dir "wpilibc/wpilibC++Devices/CMakeLists.txt")
-                      :include-path (cons "/include" (append (prepend "/../.." global-hal-includes)
-                                                             (prepend "/../.." nettables-includes)
-                                                             (prepend "/../.." wpilibc-includes)))
-                      :system-include-path (list frc-toolchain-include-dir))
-(ede-java-root-project "WPILibJ"
-                       :file (concat wpilib-dir "wpilibj/wpilibJava/pom.xml")
-                       :srcroot (list jm (concat "/../.." nettables-java-root)))
-(ede-java-root-project "WPILibJDevices"
-                       :file (concat wpilib-dir "wpilibj/wpilibJavaDevices/pom.xml")
-                       :srcroot (list jm jt (concat "/../.." wpilibj-root) (concat "/../.." nettables-java-root)))
-(ede-cpp-root-project "WPILibJavaJNI"
-                       :file (concat wpilib-dir "wpilibj/wpilibJavaJNI/CMakeLists.txt")
-                       :include-path (list "/target/include") ;; TODO: When we move to gradle
-                       :system-include-path (list frc-toolchain-include-dir))
-(ede-java-root-project "WPILibJavaIntegrationTests"
-                       :file (concat wpilib-dir "wpilibj/wpilibJavaIntegrationTests/pom.xml")
-                       :srcroot (append (list jm jt
-                                              (concat "/../.." nettables-java-root)
-                                              (concat "/../.." wpilibj-root))
-                                        (prepend "/../.." wpilibjdev-root)))
+(if (file-exists-p wpilib-dir)
+    (progn
+      (print "Enabling wpilib projects")
+      (ede-cpp-root-project "HAL"
+                            :file (concat wpilib-dir "hal/CMakeLists.txt")
+                            :include-path hal-includes
+                            :system-include-path (list frc-toolchain-include-dir))
+      (ede-cpp-root-project "NetworkTablesCpp"
+                            :file (concat wpilib-dir "networktables/cpp/CMakeLists.txt")
+                            :include-path (cons "include" (prepend "/../.." global-hal-includes))
+                            :system-include-path (list frc-toolchain-include-dir))
+      (ede-java-root-project "NetworkTablesJava"
+                             :file (concat wpilib-dir "networktables/java/pom.xml")
+                             :srcroot (list jm jt))
+      (ede-cpp-root-project "WPILibC"
+                            :file (concat wpilib-dir "wpilibc/wpilibC++/CMakeLists.txt")
+                            :include-path (cons "/include" (append (prepend "/../.." global-hal-includes) (prepend "/../.." nettables-includes)))
+                            :system-include-path (list frc-toolchain-include-dir))
+      (ede-cpp-root-project "WPILibCDevices"
+                            :file (concat wpilib-dir "wpilibc/wpilibC++Devices/CMakeLists.txt")
+                            :include-path (cons "/include" (append (prepend "/../.." global-hal-includes)
+                                                                   (prepend "/../.." nettables-includes)
+                                                                   (prepend "/../.." wpilibc-includes)))
+                            :system-include-path (list frc-toolchain-include-dir))
+      (ede-java-root-project "WPILibJ"
+                             :file (concat wpilib-dir "wpilibj/wpilibJava/pom.xml")
+                             :srcroot (list jm (concat "/../.." nettables-java-root)))
+      (ede-java-root-project "WPILibJDevices"
+                             :file (concat wpilib-dir "wpilibj/wpilibJavaDevices/pom.xml")
+                             :srcroot (list jm jt (concat "/../.." wpilibj-root) (concat "/../.." nettables-java-root)))
+      (ede-cpp-root-project "WPILibJavaJNI"
+                            :file (concat wpilib-dir "wpilibj/wpilibJavaJNI/CMakeLists.txt")
+                            :include-path (list "/target/include") ;; TODO: When we move to gradle
+                            :system-include-path (list frc-toolchain-include-dir))
+      (ede-java-root-project "WPILibJavaIntegrationTests"
+                             :file (concat wpilib-dir "wpilibj/wpilibJavaIntegrationTests/pom.xml")
+                             :srcroot (append (list jm jt
+                                                    (concat "/../.." nettables-java-root)
+                                                    (concat "/../.." wpilibj-root))
+                                              (prepend "/../.." wpilibjdev-root)))
+      )
+  (print "No wpilib found"))
+
+(defvar choreo-root "/home/fred/choreographer/")
+(if (file-exists-p choreo-root)
+    (progn
+      (print "Enabling chorographer project")
+      (ede-cpp-root-project "Choreo"
+                            :file (concat choreo-root "code/Makefile")
+                            :include-path (list "."))
+      (ede-cpp-root-project "Rosmarus"
+                            :file (concat choreo-root "rosmarus/Makefile")
+                            :include-path (list "."))
+      )
+  (print "No Choreographer found"))
