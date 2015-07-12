@@ -1,7 +1,8 @@
-[submodule "prezto"]
-	path = prezto
-	url = https://github.com/sorin-ionescu/prezto.git
 [submodule ".emacs.d"]
 	path = .emacs.d
 	url = git@github.com:syl20bnr/spacemacs.git
+	branch = master
+[submodule ".zprezto"]
+	path = .zprezto
+	url = git@github.com:sorin-ionescu/prezto.git
 	branch = master
