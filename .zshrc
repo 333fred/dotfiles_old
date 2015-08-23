@@ -12,3 +12,4 @@ fi
 
 # Customize to your needs...
 alias emacs="emacs -nw"
+alias steam="LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/usr/lib32/nvidia/:/usr/lib/nvidia/' steam"

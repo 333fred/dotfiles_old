@@ -21,6 +21,8 @@
      better-defaults
      emacs-lisp
      git
+     github
+     version-control
      markdown
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
@@ -42,6 +44,7 @@
      semantic
      spotify
      windows-scripts
+     gradle
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -177,9 +180,7 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-  (setq
-   powerline-default-separator 'arrow
-   )
+  (setq powerline-default-separator 'arrow)
   (setq racer-rust-src-path "/home/fred/local/src/rust/src/")
   ;; Make evil-mode up/down operate in screen lines instead of logical lines
   (define-key evil-motion-state-map "j" 'evil-next-visual-line)
@@ -187,7 +188,7 @@ layers configuration."
   ;; Also in visual mode
   (define-key evil-visual-state-map "j" 'evil-next-visual-line)
   (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
-)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
